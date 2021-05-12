@@ -48,19 +48,29 @@ function Homepage() {
       <div className={styles.gifPreview}>
         {gif && <img src={gif} alt="gif" className={styles.gifImg} download />}
       </div>
+      {video && <h3 className={styles.fileLabel}> Arquivo: {video.name}</h3>}
       <input
-        className={styles.uploadBtn}
         type="file"
-        name="video"
+        id="selectedFile"
+        style={{ display: "none" }}
         onChange={(e) => setVideo(e.target.files.item(0))}
       />
-      <button className={styles.convertBtn} onClick={convertToGif}>
-        Convert to GIF
-      </button>
-
-      <button className={styles.convertBtn} onClick={setDownload}>
-        Get DL link
-      </button>
+      <input
+        type="button"
+        className={styles.convertBtn}
+        onClick={() => document.getElementById("selectedFile").click()}
+        value="Upload Video"
+      />
+      <div className={styles.buttonsDiv}>
+        <button className={styles.convertBtn} onClick={convertToGif}>
+          Convert to GIF
+        </button>
+        {gif ? (
+          <button className={styles.convertBtn} onClick={setDownload}>
+            Download file
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }
