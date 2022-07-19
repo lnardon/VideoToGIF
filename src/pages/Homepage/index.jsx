@@ -2,19 +2,13 @@ import React, { useState, useEffect } from "react";
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 import styles from "./styles.module.css";
 
-const ffmpeg = createFFmpeg({ log: true });
-
 function Homepage() {
   const [video, setVideo] = useState();
   const [gif, setGif] = useState();
 
-  useEffect(() => {
-    (async () => {
-      await ffmpeg.load();
-    })();
-  }, []);
-
   const convertToGif = async () => {
+    const ffmpeg = createFFmpeg({ log: true });
+    await ffmpeg.load();
     ffmpeg.FS("writeFile", "upload.mp4", await fetchFile(video));
     await ffmpeg.run(
       "-i",
@@ -25,10 +19,10 @@ function Homepage() {
       "2.0",
       "-f",
       "gif",
-      "NRD Software result.gif"
+      "converted_file.gif"
     );
 
-    const gifFile = ffmpeg.FS("readFile", "NRD Software result.gif");
+    const gifFile = ffmpeg.FS("readFile", "converted_file.gif");
     const url = URL.createObjectURL(
       new Blob([gifFile.buffer], { type: "image/gif" })
     );
