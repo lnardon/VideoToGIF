@@ -11,11 +11,12 @@ function Homepage() {
   const [video, setVideo] = useState(null);
   const [gif, setGif] = useState(null);
   const [progress, setProgress] = useState(null);
+
   const convertToGif = async () => {
     setGif(null);
     const ffmpeg = createFFmpeg({ log: true });
     await ffmpeg.load();
-    await ffmpeg.setProgress((p) => setProgress(p.ratio));
+    ffmpeg.setProgress((p) => setProgress(p.ratio));
     ffmpeg.FS("writeFile", "upload.mp4", await fetchFile(video));
     await ffmpeg.run(
       "-i",
@@ -42,15 +43,22 @@ function Homepage() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>NRD Video to GIF</h1>
-      {gif ? (
-        <div className={styles.gifPreview}>
+      <div className={styles.gifPreview}>
+        {video && (
+          <video height="100%" controls>
+            <source src={URL.createObjectURL(video)} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
+        {gif ? (
           <img src={gif} alt="gif" className={styles.gifImg} download />
-        </div>
-      ) : (
-        progress !== null && <LoadingIndicator progress={progress} />
+        ) : (
+          progress !== null && <LoadingIndicator progress={progress} />
+        )}
+      </div>
+      {video && (
+        <h3 className={styles.fileLabel}> Arquivo selecionado: {video.name}</h3>
       )}
-      {/* <h3 className={styles.subtitle}>GIF Settings</h3> */}
-      {video && <h3 className={styles.fileLabel}> Arquivo: {video.name}</h3>}
       <input
         type="file"
         id="selectedFile"
@@ -60,41 +68,6 @@ function Homepage() {
           setGif(null);
         }}
       />
-      <ExpandableArea
-        title="GIF Settings"
-        content={
-          <div className={styles.fileSettings}>
-            <div className={styles.fileSettingsDiv}>
-              <h4 className={styles.fileSettingsLabel}>FPS: {fps}</h4>
-              <input
-                type="range"
-                name="fps"
-                id=""
-                min={5}
-                max={60}
-                value={fps}
-                onChange={(e) => setFps(e.target.value)}
-                className={styles.fileSettingsInput}
-              />
-            </div>
-            <div className={styles.fileSettingsDiv}>
-              <h4 className={styles.fileSettingsLabel}>
-                Resolution: {resolution}p
-              </h4>
-              <input
-                type="range"
-                name="resolution"
-                id=""
-                min={144}
-                max={2160}
-                value={resolution}
-                onChange={(e) => setResolution(e.target.value)}
-                className={styles.fileSettingsInput}
-              />
-            </div>
-          </div>
-        }
-      />
       <input
         type="button"
         className={styles.convertBtn}
@@ -102,13 +75,15 @@ function Homepage() {
         value="Upload Video"
       />
       <div className={styles.buttonsDiv}>
-        <button
-          className={styles.convertBtn}
-          onClick={convertToGif}
-          disabled={false}
-        >
-          Convert to GIF
-        </button>
+        {video && (
+          <button
+            className={styles.convertBtn}
+            onClick={convertToGif}
+            disabled={progress !== null}
+          >
+            Convert to GIF
+          </button>
+        )}
         {gif ? (
           <button
             className={styles.convertBtn}
@@ -119,6 +94,49 @@ function Homepage() {
             Download converted file
           </button>
         ) : null}
+        <ExpandableArea
+          title="GIF Settings"
+          content={
+            <div className={styles.fileSettings}>
+              <p className={styles.fileSettingsMessage}>
+                This website does all the processing and conversion on your
+                local machine so your files stay 100% safe. Increasing the FPS
+                and RESOLUTION of the file increase the time requires for the
+                file to be converted.
+              </p>
+              <div className={styles.fileSettingsContent}>
+                <div className={styles.fileSettingsDiv}>
+                  <h4 className={styles.fileSettingsLabel}>FPS: {fps}</h4>
+                  <input
+                    type="range"
+                    name="fps"
+                    id=""
+                    min={5}
+                    max={60}
+                    value={fps}
+                    onChange={(e) => setFps(e.target.value)}
+                    className={styles.fileSettingsInput}
+                  />
+                </div>
+                <div className={styles.fileSettingsDiv}>
+                  <h4 className={styles.fileSettingsLabel}>
+                    Resolution: {resolution}p
+                  </h4>
+                  <input
+                    type="range"
+                    name="resolution"
+                    id=""
+                    min={144}
+                    max={2160}
+                    value={resolution}
+                    onChange={(e) => setResolution(e.target.value)}
+                    className={styles.fileSettingsInput}
+                  />
+                </div>
+              </div>
+            </div>
+          }
+        />
       </div>
     </div>
   );
