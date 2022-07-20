@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 import styles from "./styles.module.css";
 
-function LoadingIndicator({ progress }) {
+function LoadingIndicator({ progress = 0 }) {
   const ref = useRef();
 
   useEffect(() => {
