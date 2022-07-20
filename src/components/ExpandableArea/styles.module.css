@@ -1,0 +1,86 @@
+.container {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0rem;
+  cursor: pointer;
+  margin: 2rem 0rem;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.icon {
+  width: 35px;
+  filter: invert(100);
+}
+
+.rightArrow {
+  animation: rightAnimation 0.5s ease forwards;
+}
+
+.downArrow {
+  animation: downAnimation 0.5s ease forwards;
+}
+
+.content {
+  opacity: 0;
+  height: 0px;
+  overflow: hidden;
+  background-color: rgb(43, 43, 43);
+  border-radius: 0.25rem;
+  margin: 1rem 0rem 0rem 0rem;
+}
+
+.open {
+  animation: openAnimation 0.5s ease forwards;
+}
+
+.closed {
+  animation: closeAnimation 0.5s ease forwards;
+}
+
+@keyframes openAnimation {
+  from {
+    opacity: 0;
+    height: 0;
+  }
+  to {
+    opacity: 1;
+    height: auto;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@keyframes closeAnimation {
+  from {
+    opacity: 1;
+    padding: 0.5rem 1rem;
+  }
+  to {
+    opacity: 0;
+    height: 0;
+  }
+}
+
+@keyframes rightAnimation {
+  from {
+    transform: rotate(-90deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes downAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-90deg);
+  }
+}

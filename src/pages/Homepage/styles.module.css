@@ -31,7 +31,7 @@ body {
   line-height: 3.5rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 5rem;
+  margin: 2rem 0rem 4rem 0rem;
   color: #fafafa;
 }
 
@@ -54,8 +54,8 @@ body {
 .fileLabel {
   font-size: 1rem;
   font-weight: normal;
-  width: 100%;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  word-break: break-all;
 }
 
 .buttonsDiv {
@@ -66,17 +66,19 @@ body {
 }
 
 .subtitle {
+  width: 100%;
   font-size: 2rem;
-  margin: 0rem 1rem 2rem 1rem;
+  margin: 0rem 1rem 0rem 1rem;
   text-align: center;
 }
 
 .fileSettings {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
-  margin-bottom: 2rem;
+  border-top: none;
+  padding: 1rem;
 }
 
 .fileSettingsDiv {
@@ -111,7 +113,7 @@ body {
   margin-bottom: 1rem;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 499px) {
   .fileSettings {
     flex-direction: column;
     width: 100%;
