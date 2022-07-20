@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
+
+import LoadingIndicator from "../../components/LoadingIndicator";
 import styles from "./styles.module.css";
 
 function Homepage() {
@@ -7,10 +9,14 @@ function Homepage() {
   const [resolution, setResolution] = useState(720);
   const [video, setVideo] = useState();
   const [gif, setGif] = useState();
+  const [progress, setProgress] = useState(0);
 
   const convertToGif = async () => {
-    const ffmpeg = createFFmpeg({ log: true });
+    const ffmpeg = createFFmpeg({
+      log: true,
+    });
     await ffmpeg.load();
+    await ffmpeg.setProgress((p) => setProgress(p.ratio));
     ffmpeg.FS("writeFile", "upload.mp4", await fetchFile(video));
     await ffmpeg.run(
       "-i",
@@ -40,10 +46,12 @@ function Homepage() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>NRD Video to GIF</h1>
-      {gif && (
+      {gif ? (
         <div className={styles.gifPreview}>
           <img src={gif} alt="gif" className={styles.gifImg} download />
         </div>
+      ) : (
+        <LoadingIndicator progress={progress} />
       )}
       {video && <h3 className={styles.fileLabel}> Arquivo: {video.name}</h3>}
       <input
