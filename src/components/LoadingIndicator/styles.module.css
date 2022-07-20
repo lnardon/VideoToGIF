@@ -1,0 +1,16 @@
+.progressContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.progressValue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0%;
+  height: 17px;
+  background-color: darkmagenta;
+  transition: 0.3s ease forwards;
+}
