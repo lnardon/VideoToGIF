@@ -6,8 +6,8 @@
 
 body {
   width: 100vw;
-  height: 100vh;
-  background-color: #fafafa;
+  min-height: 100vh;
+  background-color: #171717;
   font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@ body {
 
 .container {
   width: 90%;
-  max-width: 700px;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,6 +31,7 @@ body {
   font-weight: bold;
   text-align: center;
   margin-bottom: 5rem;
+  color: #fafafa;
 }
 
 .gifPreview {
@@ -46,7 +47,7 @@ body {
 }
 
 .gifImg {
-  width: 90%;
+  height: 90%;
 }
 
 .fileLabel {
@@ -63,6 +64,38 @@ body {
   width: 100%;
 }
 
+.subtitle {
+  font-size: 2rem;
+  margin: 0rem 1rem 2rem 1rem;
+  text-align: center;
+}
+
+.fileSettings {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.fileSettingsDiv {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.fileSettingsLabel {
+  font-size: 1.25rem;
+  font-weight: normal;
+  margin: 0.25rem 0rem;
+}
+
+.fileSettingsInput {
+  outline: none;
+  width: 100%;
+  max-width: 450px;
+}
+
 .convertBtn {
   width: 100%;
   font-size: 1rem;
@@ -75,4 +108,16 @@ body {
   color: #fafafa;
   border-radius: 0.25rem;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 450px) {
+  .fileSettings {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .fileSettingsDiv {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
 }
