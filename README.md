@@ -1,17 +1,15 @@
-# Convert videos into GIF
+# [Video to GIF](https://nrd-video-to-gif.herokuapp.com/ "Homepage")
 
-A free online video to gif converter using the Web Assembly version of the famous ffmpeg library
+A free website to convert .mp4 files to .gif locally using ffmpeg (Web Assembly).
 
 <p align="center">
-
+ <img style="width:100%" src="./demo.gif">
 </p>
 
-## [Try it out here](https://nrd-videotogif.web.app/ "Homepage")
+## [Try it here](https://nrd-video-to-gif.herokuapp.com/ "Homepage")
 
-### What was used on this project
+### What was used
 
 - Reactjs
-- Firebase Hosting
-- Web Assembly version of ffmpeg
-
-Created by NRD Software
+- Heroku
+- ffmpeg (WebAssebly)
