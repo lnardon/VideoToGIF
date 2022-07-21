@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
@@ -22,7 +22,7 @@ function Homepage() {
       "-i",
       "upload.mp4",
       "-vf",
-      `fps=${fps},scale=${resolution}:0:flags=lanczos`,
+      `fps=${fps},scale=${resolution}:-1:flags=lanczos`,
       "-f",
       "gif",
       "converted_file.gif"
@@ -40,25 +40,30 @@ function Homepage() {
     link.download = filename;
     link.click();
   }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>NRD Video to GIF</h1>
+      {video && (
+        <div className={styles.fileNameContainer}>
+          <h3 className={styles.fileLabel}> Selected File:</h3>
+          <h4 className={styles.fileName}> {video.name}</h4>
+        </div>
+      )}
       <div className={styles.gifPreview}>
-        {video && (
-          <video height="100%" controls>
-            <source src={URL.createObjectURL(video)} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        )}
-        {gif ? (
+        {progress !== null ? (
+          <LoadingIndicator progress={progress} />
+        ) : gif ? (
           <img src={gif} alt="gif" className={styles.gifImg} download />
         ) : (
-          progress !== null && <LoadingIndicator progress={progress} />
+          video && (
+            <video className={styles.video} controls>
+              <source src={URL.createObjectURL(video)} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )
         )}
       </div>
-      {video && (
-        <h3 className={styles.fileLabel}> Arquivo selecionado: {video.name}</h3>
-      )}
       <input
         type="file"
         id="selectedFile"
@@ -68,12 +73,12 @@ function Homepage() {
           setGif(null);
         }}
       />
-      <input
-        type="button"
+      <button
         className={styles.convertBtn}
         onClick={() => document.getElementById("selectedFile").click()}
-        value="Upload Video"
-      />
+      >
+        Select Video
+      </button>
       <div className={styles.buttonsDiv}>
         {video && (
           <button
@@ -99,10 +104,10 @@ function Homepage() {
           content={
             <div className={styles.fileSettings}>
               <p className={styles.fileSettingsMessage}>
-                This website does all the processing and conversion on your
-                local machine so your files stay 100% safe. Increasing the FPS
-                and RESOLUTION of the file increase the time requires for the
-                file to be converted.
+                All the processing and conversion of the file is done on your
+                local machine so your files never leave your computer.
+                Increasing the FPS and RESOLUTION values also increases the time
+                required for the file to be converted.
               </p>
               <div className={styles.fileSettingsContent}>
                 <div className={styles.fileSettingsDiv}>

@@ -13,7 +13,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
 }
 
 .container {
@@ -22,7 +21,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   padding: 1rem;
 }
 
@@ -35,27 +33,48 @@ body {
   color: #fafafa;
 }
 
+.video {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .gifPreview {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90%;
-  border: 2px dashed #fafafa;
+  border: 1px dashed #fafafa;
   margin-bottom: 2rem;
   padding: 0.5rem;
-  max-width: 100%;
+  width: 100%;
   height: 350px;
+  border-radius: 0.25rem;
+}
+
+.fileNameContainer {
+  width: 100%;
+  color: #fafafa;
+  padding: 0.25rem 0rem;
 }
 
 .gifImg {
-  height: 90%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .fileLabel {
   font-size: 1rem;
-  font-weight: normal;
-  margin-bottom: 1rem;
+  font-weight: bold;
   word-break: break-all;
+  width: 100%;
+  color: lightgrey;
+}
+
+.fileName {
+  font-size: 0.75rem;
+  font-weight: 400;
+  word-break: break-all;
+  width: 100%;
 }
 
 .buttonsDiv {
