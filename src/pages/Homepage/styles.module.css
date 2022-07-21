@@ -24,12 +24,18 @@ body {
   padding: 1rem;
 }
 
+.logo {
+  width: 25%;
+  max-width: 200px;
+  margin: 2rem;
+}
+
 .title {
   font-size: 3.5rem;
   line-height: 3.5rem;
   font-weight: bold;
   text-align: center;
-  margin: 2rem 0rem 4rem 0rem;
+  margin-bottom: 5rem;
   color: #fafafa;
 }
 
@@ -173,6 +179,12 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 @media (max-width: 499px) {
+  .title {
+    font-size: 2rem;
+    line-height: 2rem;
+    margin-bottom: 4rem;
+  }
+
   .fileSettingsContent {
     flex-direction: column;
     width: 100%;

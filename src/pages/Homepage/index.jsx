@@ -3,6 +3,7 @@ import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
 import ExpandableArea from "../../components/ExpandableArea";
+import Logo from "./logo.svg";
 import styles from "./styles.module.css";
 
 function Homepage() {
@@ -43,7 +44,8 @@ function Homepage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>NRD Video to GIF</h1>
+      <img className={styles.logo} src={Logo} alt="Logo" />
+      <h1 className={styles.title}>Video to GIF</h1>
       {video && (
         <div className={styles.fileNameContainer}>
           <h3 className={styles.fileLabel}> Selected File:</h3>
@@ -94,7 +96,7 @@ function Homepage() {
             onClick={convertToGif}
             disabled={progress !== null}
           >
-            Convert
+            Convert Video
           </button>
         )}
         {gif ? (

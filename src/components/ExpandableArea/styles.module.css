@@ -14,6 +14,8 @@
   font-size: 1.25rem;
   font-weight: bold;
   outline: none;
+  border-bottom: 3px solid darkmagenta;
+  padding-bottom: 0.5rem;
 }
 
 .icon {
