@@ -74,7 +74,11 @@ function Homepage() {
         }}
       />
       <button
-        className={styles.convertBtn}
+        className={
+          styles.convertBtn +
+          " " +
+          (video ? styles.disabledBtn : styles.activeBtn)
+        }
         onClick={() => document.getElementById("selectedFile").click()}
       >
         Select Video
@@ -82,21 +86,29 @@ function Homepage() {
       <div className={styles.buttonsDiv}>
         {video && (
           <button
-            className={styles.convertBtn}
+            className={
+              styles.convertBtn +
+              " " +
+              (video && !gif ? styles.activeBtn : styles.disabledBtn)
+            }
             onClick={convertToGif}
             disabled={progress !== null}
           >
-            Convert to GIF
+            Convert
           </button>
         )}
         {gif ? (
           <button
-            className={styles.convertBtn}
+            className={
+              styles.convertBtn +
+              " " +
+              (gif ? styles.activeBtn : styles.disabledBtn)
+            }
             onClick={() =>
               download(gif, "converted_file(github.com/lnardon/VideoToGIF).gif")
             }
           >
-            Download converted file
+            Download GIF
           </button>
         ) : null}
         <ExpandableArea

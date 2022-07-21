@@ -130,7 +130,6 @@ body {
   outline: none;
   width: 100%;
   max-width: 450px;
-
   background: linear-gradient(to right, darkmagenta 0%, rgb(201, 3, 201) 100%);
   border: solid 1px darkmagenta;
   border-radius: 8px;
@@ -155,13 +154,22 @@ input[type="range"]::-webkit-slider-thumb {
   font-size: 1rem;
   font-weight: bold;
   padding: 1rem;
-  border: none;
   cursor: pointer;
   outline: none;
-  background-color: darkmagenta;
-  color: #fafafa;
   border-radius: 0.25rem;
   margin-bottom: 1rem;
+}
+
+.activeBtn {
+  border: none;
+  background-color: darkmagenta;
+  color: #fafafa;
+}
+
+.disabledBtn {
+  border: 3px solid darkmagenta;
+  background-color: transparent;
+  color: #fafafa;
 }
 
 @media (max-width: 499px) {
